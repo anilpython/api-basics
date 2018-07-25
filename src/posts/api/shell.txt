@@ -1,0 +1,31 @@
+from posts.models import Post
+
+from posts.api.serializers import PostSerializer
+
+obj = Post.objects.first()
+print(obj) # AgraTour Pictures
+obj        # <Post: AgraTour Pictures>
+obj.id     # 1
+
+obj_data = PostSerializer(obj)
+obj_data.data  #{'content': u'The Taj Mahal.', 'slug': u'taj-mahal', 'id': 1, 'title': u'AgraTour Pictures'}
+
+obj_data.data['id'] # 1 # it still works as python dictionary
+
+data = {
+	"title":"Anil Kumar",
+	"slug":"anil-kumar",
+	"content":"new content",
+}
+
+new_item = PostSerializer(data=data)
+new_item.data # it will give error
+new_item.initial_data
+new_item.data # it won't give error
+
+new_item = PostSerializer(data=data)
+
+if new_item.is_valid():
+  new_item.save()
+else:
+  print(new_item.errors)
