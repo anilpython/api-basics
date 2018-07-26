@@ -29,3 +29,34 @@ if new_item.is_valid():
   new_item.save()
 else:
   print(new_item.errors)
+
+
+######Updating#########
+
+from posts.models import Post
+from posts.api.serializers import PostUpdateSerializer
+
+data = {
+	"title":"Anil Kumar",
+	"slug":"anil-kumar",
+	"content":"new content",
+}
+
+obj = Post.objects.get(id=2)
+new_item = PostDetailSerializer(obj, data=data)
+if new_item.is_valid():
+  new_item.save()
+else:
+  print(new_item.errors)
+
+#####Deleting#####
+obj.delete()
+
+
+
+
+
+
+
+
+
